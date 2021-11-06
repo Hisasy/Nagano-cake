@@ -15,5 +15,10 @@
 </li>
 
 <h1>注文履歴一覧</h1>
-<%= @order.name %>
+<%= @order.each do |order| %>
+  <%= link_to order.date_full, show_orders_path(order) %>
+  <%= order.customer.full_name %>
+  <%= order.order_details.amount %>
+  <%= order.order_status %>
+<% end %>
 

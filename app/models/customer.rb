@@ -7,4 +7,8 @@ class Customer < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :order_details, dependent: :destroy
 
+  def full_name
+    "#{last_name}#{first_name}"
+  end
+
 end

@@ -1,0 +1,8 @@
+<h2>注文履歴詳細</h2>
+
+<p>購入者</p><%= link_to @order.customers.full_name, show_customer_path(@order) %>
+<p>注文日</p><%= @order.date %>
+<p>配送先</p><%= @order.shipping_postal_code %><%= @order.shipping_address %>
+             <%= @order.name %>
+<p>支払方法</p><%= @order.method_of_payment %>
+<p>注文ステータス</p><%= @order.order_status %>

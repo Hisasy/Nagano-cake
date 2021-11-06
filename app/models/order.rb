@@ -10,5 +10,13 @@ class Order < ApplicationRecord
   validates :postal_code, presence: true
   validates :address, presence: true
 
+  def date_full
+    created_at.created_at.strftime('%Y/%m/%d %H:%M:%S')
+  end
+
+  def date
+    created_at.created_at.strftime('%Y/%m/%d') 
+  end
+
 
 end
