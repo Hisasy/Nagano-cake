@@ -1,0 +1,24 @@
+<h2>マイページ</h2>
+
+<h3>登録情報</h3><%= link_to "編集する", edit_customer_path(current_customer) %>
+
+<tr>
+  <p>氏名</p><%= current_customer.full_name %>
+</tr>
+<tr>
+  <p>カナ</p><%= current_customer.full_kana %>
+</tr>
+<tr>
+  <p>郵便番号</p><%= current_customer.postal_code %>
+</tr>
+<tr>
+  <p>住所</p><%= current_customer.address %>
+</tr>
+<tr>
+  <p>電話番号</p><%= current_customer.telephone_number %>
+</tr>
+<tr>
+  <p>メールアドレス</p><%= current_customer.email %>
+</tr>
+
+<h3>配送先</h3><%= link_to "一覧を見る", addresses_path %>

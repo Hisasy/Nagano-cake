@@ -1,18 +1,4 @@
-<li>
-  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-</li>
 
-<li>
-  <%= link_to "ジャンル一覧", admin_genres_path %>
-</li>
-
-<li>
-  <%= link_to "商品一覧", admin_items_path %>
-</li>
-
-<li>
-  <%= link_to "会員一覧", admin_customers_path %>
-</li>
 
 <h1>注文履歴一覧</h1>
 <%= @order.each do |order| %>
