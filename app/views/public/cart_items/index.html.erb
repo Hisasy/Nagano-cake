@@ -1,1 +1,44 @@
-<h2>カート内商品一覧画面</h2>
+<h5 class="title">ショッピングカート</h5>
+<div class="container">
+
+  <div><%= link_to "全てを削除する",cart_items_all_destroy_path, method: :delete, class: "btn btn-info mb-3"%></div>
+
+  <table class="table">
+    <thread>
+      <tr>
+        <th style="width: 15%">商品画像</th>
+        <th style="width: 20%">商品名</th>
+        <th style="width: 15%">単価(税込)</th>
+        <th style="width: 20%">数量</th>
+        <th style="width: 15%">小計</th>
+        <th style="width: 15%"></th>
+      </tr>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <%= link_to item_path(cart_item.item.id) do %>
+              <%= attachment_image_tag cart_item.item, :image, format: 'jpeg', size: "100x100", class: "item-img rounded" %>
+            <% end %>
+          </td>
+          <td><%= cart_item.item.name %></td>
+          <td>¥<%= cart_item.add_tax_price.to_s(:delimited) %></td>
+          <td>
+            <%= form_with model:cart_item,url:cart_item_path(cart_item),method: :patch,local:true do |f| %>
+              <!--この隠れフィールド必要？これで商品と数量をリンクさせている？-->
+              <%= f.hidden_field :item_id, value:cart_item.item.id %>
+              <!--valueであらかじめcart_itemのamountを記述しておく-->
+              <%= f.number_field :amount,value:cart_item.amount,id:"number",min:"1" %>
+              <%= f.submit '数量変更',class: "btn btn-outline-info mt-3 btn-sm" %>
+            <% end %>
+          </td>
+          <td>¥<%= cart_item.sub_price.to_s(:delimited) %></td>
+          <td><%= link_to "削除する",cart_item_path(cart_item),method: :delete,class: "btn btn-info btn-sm" %></td>
+        </tr>
+      <% end %>
+    </thread>
+  </table>
+
+  <div><%= link_to "買い物を続ける",root_path, class: "btn btn-outline-info mb-3" %></div>
+  <div>合計金額　 ¥<%= @total.round.to_s(:delimited) %></div>
+  <div><%= link_to "情報入力にすすむ", new_order_path, class:"btn btn-outline-info float-right btn-lg" %></div>
+</div>

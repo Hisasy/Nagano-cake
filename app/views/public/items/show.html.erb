@@ -1,0 +1,49 @@
+<h5 class="title">商品詳細</h5>
+
+<div class="container">
+  <div class="mx-auto" style="width: 280px;">
+    <div class="row">
+      <div class="col-4 p-2 mb-1 bg-info text-white rounded"><%= @item.genre.name %></div>
+      <div class="col-8 p-2 mb-1 "><%= @item.name %></div>
+
+      <figure class="figure">
+        <%= attachment_image_tag @item, :image, format: 'jpeg', size: "310x310",class: "item-img figure-img  rounded" %>
+        <figcaption class="figure-caption"><%= @item.introduction %></figcaption>
+        <figcaption class="figure-caption"><h3 style="display:inline"><%= @item.add_tax_price.to_s(:delimited) %>円</h5>(税抜<%= @item.price.to_s(:delimited) %>円)</figcaption>
+        <figcaption class="figure-caption text-info">
+          <% if @item.is_active == true %>
+            <p>販売中</p>
+          <% elsif @item.is_active == false %>
+            <p>販売停止中</p>
+          <% end %>
+        </figcaption>
+        <figcaption class="figure-caption text-right">
+          <!--カートに商品を入れる-->
+          <!--商品が販売中か停止中かで分岐-->
+          <% if @item.is_active == false %>
+            <p>soldout</p>
+          <% else %>
+            <!--サインインしているかどうかで分岐-->
+            <% if customer_signed_in? %>
+              <%= form_with model:@cart_item, url:cart_items_path,method: :post, local:true do |f| %>
+                <!--隠れフィールドで商品と顧客(当人)の情報を数量にリンクさせている-->
+                <%= f.hidden_field :item_id, value:@item.id %>
+                <%= f.hidden_field :customer_id, :value => current_customer.id %>
+                <!--選択されていない状態では'個数選択'になるようにする-->
+                <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10], {include_blank:'個数選択'}, required:true %>
+                <div class="clearfix mt-4">
+                  <%= f.submit 'カートに入れる', class:"btn btn-outline-info float-right" %>
+                </div>
+              <% end %>
+            <% else %>
+              <p>注文にはログインが必要です</p>
+            <% end %>
+          <% end %>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+<!--ジャンル検索-->
+<!--%= render 'public/items/genre', genres: @genres %>-->

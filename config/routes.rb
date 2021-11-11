@@ -16,14 +16,17 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
-    get 'customers/quit' => 'customers#quit', as: 'customers_quit'
+    get 'customers/quit'  => 'customers#quit', as: 'customers_quit'
     patch 'customers/out' => 'customers#out', as: 'customers_out'
-    delete 'cart_items/all_destroy' => 'cart_items#all_destroy', as: 'all_destroy'
-    
+    get 'orders/comfirm'  => 'orders#comfirm'
+    get 'orders/thanks'   => 'orders#thanks'
+
     resources :customers,  only:[:show, :edit, :update]
     resources :addresses,  only:[:index, :edit, :create, :update, :destroy]
     resources :items,      only:[:index, :show]
     resources :cart_items, only:[:index, :update, :destroy, :create]
+    resources :orders,     only:[:new, :create, :index, :show]
+    delete 'cart_items/all_destroy' => 'cart_items#all_destroy'
   end
 
   namespace :admin do

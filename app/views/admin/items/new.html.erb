@@ -1,17 +1,50 @@
-<h2>商品新規登録</h2>
+<div class="container">
+  <h5 class="title2">商品新規登録</h5>
+  <div class="row align-items-center">
+    <div class="col">
 
-<%= form_with model:@item, url:admin_items_path, local:true do |f| %>
-  <h4>商品画像</h4>
-  <%= f.attachment_field :image %>
-  <h4>商品名</h4>
-  <%= f.text_field :name %>
-  <h4>商品説明</h4>
-  <%= f.text_area :introduction %>
-  <h4>ジャンル</h4>
-  <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい" %>
-  <h4>税抜価格</h4>
-  <%= f.text_field :price %><span>円</span>
-  <h4>販売ステータス</h4>
+      <%= form_with model: @item, url: admin_items_path, local: true do |f| %>
 
-  <%= f.submit '新規登録' %>
-<% end %>
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <%= f.label :image, '商品画像', class: "form-label, col-2" %>
+          <%= f.attachment_field :image, class: "form-control, col-4" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :name, '商品名', class: "form-label, col-2" %>
+          <%= f.text_field :name, class: "form-control, col-4" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :introduction, '商品説明', class: "form-label, col-2" %>
+          <%= f.text_area :introduction, class: "form-control, col-4" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :genre_id, 'ジャンル', class: "form-label, col-2" %>
+          <%= f.collection_select :genre_id, @genres, :id, :name, :include_blank => "カテゴリを選択してください", class: "form-control, col-4" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :price, '税込価格', class: "form-label, col-2" %>
+          ¥<%= f.text_field :price, class: "form-control, col-2" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :is_active, '販売ステータス', class: "form-label, col-2" %>
+          <%= f.select :is_active, [['販売中', true], ['販売停止', false]], include_blank: "選択してください", class: "form-control, col-4" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "新規登録", class: "btn btn-info" %>
+        </div>
+
+      </form>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<h5 class="title">注文情報入力</h5>
+<div class="container">
+  <div class="mx-auto" style="width: 550px;">
+    <%= form_with model: @order, url: orders_comfirm_path, method: :get, local: true do |f| %>
+      <div class="col-4 p-2 mb-1 bg-danger rounded">支払方法</div>
+      <%= f.radio_button :method_of_payment, "クレジットカード", checked: "checked" %>
+      <%= f.label :method_of_payment, "クレジットカード" %><br />
+      <%= f.radio_button :method_of_payment, "銀行振込" %>
+      <%= f.label :method_of_payment, "銀行振込" %><br />
+
+
+      <div class="col-4 p-2 mb-1 bg-danger rounded">お届け先</div>
+      <%= f.radio_button :address_option, 0 %>
+      <%= f.label :order_address, "ご自身の住所" %><br />
+      <%= "〒"+current_customer.postal_code %>
+      <%= current_customer.address %>
+      <%= current_customer.full_name %><br />
+
+      <%= f.radio_button :address_option, 1 %>
+      <%= f.label :order_address_id, "登録済住所から選択" %>
+      <%= f.collection_select :order_address_id, current_customer.addresses, :id, :full_address, :include_blank => "選択してください", class: "form-control",size: "20x40" %><br />
+
+      <%= f.radio_button :address_option, 2 %>
+      <%= f.label :order_address_id, "新しいお届け先"  %><br />
+      <div>
+        <%= f.label :postal_code, "郵便番号(ハイフンなし)",class: "col-5 ml-3 m-2" %>
+        <%= f.text_field :postal_code, class: "form-control col-6 float-right" %>
+      </div>
+      <div>
+        <%= f.label :address_option, "住所",class: "col-5 ml-3 m-2" %>
+        <%= f.text_field :order_address, class: "form-control col-6 float-right" %>
+      </div>
+      <div>
+        <%= f.label :name, "宛名",class: "col-5 ml-3 m-2" %>
+        <%= f.text_field :name, class: "form-control col-6 float-right " %>
+      </div>
+
+      <%= f.submit "確認画面へ進む", class: "btn btn-outline-info mt-3 float-right" %>
+    <% end %>
+  </div>
+</div>

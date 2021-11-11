@@ -1,0 +1,68 @@
+<h5 class="title">注文情報の確認</h5>
+<div class="container">
+
+  <div class="row">
+    <div class="col-7">
+      <table class="table table-bordered float-left">
+        <thead>
+          <th width="100">商品名</th>
+          <th width="200">単価（税込み）</th>
+          <th width="100">数量</th>
+          <th width="100">小計</th>
+        </thead>
+
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.item.name %></td>
+              <td>¥<%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+              <td><%= cart_item.amount %></td>
+              <td>¥<%= (cart_item.amount * cart_item.item.add_tax_price).to_s(:delimited) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="col-5">
+      <table class="table table-bordered float-right">
+        <tr>
+          <th>送料</th>
+          <td>¥<%= @order.postage %></td>
+        </tr>
+        <tr>
+          <th>商品合計金額</th>
+          <td>¥<%= @total.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th>ご請求額</th>
+          <td>¥<%= (@total + @order.postage).to_s(:delimited) %></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-2">支払方法</div>
+      <div class="col-10"><%= @order.method_of_payment %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">お届け先</div>
+      <div class="col-10">
+        <%= '〒'+@order.shipping_postal_code %></br><%= @order.shipping_address %></br><%= @order.name %>
+        <%= form_with model: @order, url: orders_path , method: :post, local: true do |f| %>
+          <%= f.hidden_field :shipping_postal_code, :value => @order.shipping_postal_code %>
+          <%= f.hidden_field :shipping_address, :value => @order.shipping_address %>
+          <%= f.hidden_field :name, :value => @order.name %>
+          <%= f.hidden_field :billing_amount, :value => @total.to_i + @order.postage.to_i %>
+          <%= f.submit "注文完了", class: "btn btn-outline-info float-right btn-lg" %>
+        <% end %>
+      </div>
+    </div>
+  </div>

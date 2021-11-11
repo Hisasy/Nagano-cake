@@ -15,7 +15,7 @@ class Order < ApplicationRecord
   end
 
   def date
-    created_at.created_at.strftime('%Y/%m/%d') 
+    created_at.created_at.strftime('%Y/%m/%d')
   end
 
 
