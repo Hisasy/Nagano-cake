@@ -15,4 +15,9 @@ class Item < ApplicationRecord
     (self.price * 1.10).round
   end
 
+  # def self.search_for(content)
+  #   #.orを使用することで、contentに一致するカラムのデータをnameカラムとgenre_idカラムから探してきます。
+  #   Item.where('name LIKE ?', '%'+content+'%').or(Item.where(genre_id: content))
+  # end
+
 end

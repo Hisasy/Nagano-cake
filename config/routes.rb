@@ -20,13 +20,14 @@ Rails.application.routes.draw do
     patch 'customers/out' => 'customers#out', as: 'customers_out'
     get 'orders/comfirm'  => 'orders#comfirm'
     get 'orders/thanks'   => 'orders#thanks'
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
 
     resources :customers,  only:[:show, :edit, :update]
     resources :addresses,  only:[:index, :edit, :create, :update, :destroy]
     resources :items,      only:[:index, :show]
     resources :cart_items, only:[:index, :update, :destroy, :create]
     resources :orders,     only:[:new, :create, :index, :show]
-    delete 'cart_items/all_destroy' => 'cart_items#all_destroy'
+
   end
 
   namespace :admin do
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
     resources :genres,        only:[:index, :create, :edit, :update]
     resources :items,         only:[:index, :new, :create, :show, :edit, :update]
     resources :customers,     only:[:index, :show, :edit, :update]
-    resources :order,         only:[:show, :update]
+    resources :orders,        only:[:show, :update]
     resources :order_details, only:[:update]
   end
 end

@@ -10,25 +10,6 @@ class Public::CartItemsController < ApplicationController
     @total = @cart_items.inject(0) { |sum, item| sum + item.sub_price }
   end
 
-  def update
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.update(cart_item_params)
-    redirect_to cart_items_path
-  end
-
-  def destroy
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.destroy
-    redirect_to cart_items_path
-  end
-
-  def all_destroy
-    # 全てを削除するのでfindではなくall
-    @cart_items = current_customer.cart_items.all
-    @cart_items.cart_items_all_destroy
-    redirect_to cart_items_path
-  end
-
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
@@ -49,10 +30,29 @@ class Public::CartItemsController < ApplicationController
     redirect_to cart_items_path,notice:'カートに商品が追加されました'
   end
 
+  def update
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
+    redirect_to cart_items_path
+  end
+
+  def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    redirect_to cart_items_path
+  end
+
+  def destroy_all
+    # 全てを削除するのでfindではなくall
+    @cart_items = current_customer.cart_items.all
+    @cart_items.destroy_all
+    redirect_to cart_items_path
+  end
+
   private
 
   def cart_item_params
-    params.permit(:item_id, :customer_id, :amount)
+    params.permit(:item_id,:customer_id,:amount)
   end
 
 end

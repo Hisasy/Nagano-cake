@@ -1,8 +1,90 @@
-<h2>注文履歴詳細</h2>
+<div class="container">
+  <div class="row">
+    <h5 class="title2">注文履歴詳細</h5>
+  </div>
 
-<p>購入者</p><%= link_to @order.customers.full_name, show_customer_path(@order) %>
-<p>注文日</p><%= @order.date %>
-<p>配送先</p><%= @order.shipping_postal_code %><%= @order.shipping_address %>
-             <%= @order.name %>
-<p>支払方法</p><%= @order.method_of_payment %>
-<p>注文ステータス</p><%= @order.order_status %>
+  <div class="row">
+    <div class="col-8 mb-5">
+
+      <table>
+        <tr>
+          <td style="width: 10%">購入者</td>
+          <td style="width: 35%"><%= link_to @order.customer.full_name, admin_customer_path(@order.customer) %></td>
+        </tr>
+        <tr>
+          <td>注文日</td>
+          <td><%= @order.date_full %></td>
+        </tr>
+        <tr>
+          <td>配送先</td>
+          <td>
+            <%= @order.shipping_postal_code %> <%= @order.shipping_address %> <br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <td>支払い方法</td>
+          <td><%= @order.method_of_payment %></td>
+        </tr>
+        <tr>
+          <td>注文ステータス</td>
+          <td>
+            <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
+              <%= f.select :order_status, options_for_select(Order.order_statuses, selected: Order.order_statuses[@order.order_status]) %>
+              <%= f.submit "更新", class: "btn-info #{ "disabled" if @condition_order }" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <table class="table">
+        <thead>
+          <th>商品名</th>
+          <th>単価（税込み）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>製作ステータス</th>
+        </thead>
+
+        <tbody>
+          <% @order_detail.each do |order_detail| %>
+            <tr>
+              <td><%= order_detail.item.name %></td>
+              <td>¥<%= order_detail.item.add_tax_price.to_s(:delimited) %></td>
+              <td><%= order_detail.amount %></td>
+              <td>¥<%= (order_detail.item.add_tax_price * order_detail.amount).to_s(:delimited) %></td>
+              <td>
+                <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch,  local: true do |f| %>
+                  <%= f.select :production_status, options_for_select(OrderDetail.production_statuses, selected: OrderDetail.production_statuses[order_detail.production_status]) %>
+                  <%= f.submit "更新", class: "btn-info #{ "disabled" if @condition_detail }" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-4">
+      <table>
+        <tr>
+          <td style="width: 50%">合計金額</td>
+          <td style="width: 40%">¥<%= (@order.billing_amount.to_i - @order.postage).to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <td>送料</td>
+          <td>¥800</td>
+        </tr>
+        <tr>
+          <td>請求金額合計</td>
+          <td>¥<%= @order.billing_amount.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

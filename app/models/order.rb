@@ -6,16 +6,16 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_details, dependent: :destroy
 
+  validates :shipping_postal_code, presence: true
+  validates :shipping_address, presence: true
   validates :name, presence: true
-  validates :postal_code, presence: true
-  validates :address, presence: true
 
   def date_full
-    created_at.created_at.strftime('%Y/%m/%d %H:%M:%S')
+    created_at.strftime('%Y/%m/%d %H:%M:%S')
   end
 
   def date
-    created_at.created_at.strftime('%Y/%m/%d')
+    created_at.strftime('%Y/%m/%d')
   end
 
 
