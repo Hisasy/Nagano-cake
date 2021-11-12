@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'search/search'
   root to: 'homes#top'
   get '/about' => 'homes#about'
 
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top'
-    resources :genres,        only:[:index, :create, :edit, :update]
+    resources :genres,        only:[:index, :create, :edit, :update, :destroy]
     resources :items,         only:[:index, :new, :create, :show, :edit, :update]
     resources :customers,     only:[:index, :show, :edit, :update]
     resources :orders,        only:[:show, :update]

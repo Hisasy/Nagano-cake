@@ -1,0 +1,16 @@
+<h5 class="title">ジャンルから探す</h5>
+
+<div class="container">
+  <div class="row mr-5 ml-5">
+    <% genres.each do |genre| %>
+      <div class="col-sm">
+        <!--genre.nameをリンクにしてsearchアクションを実行-->
+        <!--第一引数、第二引数にvalueを定義してコントローラで必要な情報を受け取れるようにしている-->
+        <!--%= link_to search_search_path('search[value]': genre.id) do %>-->
+        <!--  <div>%= attachment_image_tag genre, :image, format: 'jpeg', size: "200x200",class: "top-item-img rounded" %></div>-->
+        <!--% end %>-->
+        <!--<div>%= genre.name %></div>-->
+      </div>
+    <% end %>
+  </div>
+</div>

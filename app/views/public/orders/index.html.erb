@@ -1,0 +1,33 @@
+<h5 class="title">注文履歴一覧</h5>
+<div class="container">
+  <div class="row w-75 mx-auto">
+    <div class="col">
+     <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>注文日</th>
+            <th>配送先</th>
+            <th>支払い金額</th>
+            <th>注文ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at.strftime("%Y年%m月%d日") %></td>
+              <td>
+                <%= order.shipping_postal_code %><br>
+                <%= order.shipping_address %>
+              </td>
+              <td>¥<%= order.billing_amount.to_s(:delimited) %></td>
+              <td><%= order.order_status %></td>
+              <td><%= link_to "詳細ページ", order_path(order) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

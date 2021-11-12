@@ -10,6 +10,19 @@
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <!--アイコン部分-->
+        <%= link_to root_path do %>
+          <%= image_tag"img/ol_nagano_logo.png",class:"navbar-brand"%>
+        <% end %>
+        <!--ハンバーガー部分-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--ナビゲーションメニュー-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li class="nav-item">
             <%= link_to ' お店の紹介', about_path %>
@@ -56,6 +69,7 @@
             <%= link_to ' ログイン', new_customer_session_path %>
           </li>
         <% end %>
+      
     <%= yield %>
   </body>
 </html>

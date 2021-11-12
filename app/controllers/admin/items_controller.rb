@@ -14,7 +14,6 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      flash[:success]="商品が新たに追加されました"
       redirect_to admin_item_path(@item)
     else
       render :new
@@ -36,6 +35,7 @@ class Admin::ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to admin_item_path(@item)
     else
+      @genres = Genre.all
       render :edit
     end
   end

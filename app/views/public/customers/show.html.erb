@@ -1,24 +1,50 @@
-<h2>マイページ</h2>
+<h5 class="title">マイページ</h5></br>
+<div class="container">
 
-<h3>登録情報</h3><%= link_to "編集する", edit_customer_path(current_customer) %>
+	<%= link_to "会員情報編集", edit_customer_path, class: "btn btn-info mb-3" %>
 
-<tr>
-  <p>氏名</p><%= current_customer.full_name %>
-</tr>
-<tr>
-  <p>カナ</p><%= current_customer.full_kana %>
-</tr>
-<tr>
-  <p>郵便番号</p><%= current_customer.postal_code %>
-</tr>
-<tr>
-  <p>住所</p><%= current_customer.address %>
-</tr>
-<tr>
-  <p>電話番号</p><%= current_customer.telephone_number %>
-</tr>
-<tr>
-  <p>メールアドレス</p><%= current_customer.email %>
-</tr>
+  <div class="row">
+    <div class="col-sm-12">
+ 			<table class="table table-striped">
+ 				<tbody>
+					<tr valign="middle">
+						<td width="100">氏名</td>
+						<td width="100"><%= current_customer.last_name %> <%= current_customer.first_name %></td>
+					</tr>
 
-<h3>配送先</h3><%= link_to "一覧を見る", addresses_path %>
+					<tr valign="middle">
+						<td width="200">カナ</td>
+						<td width="200"><%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %></td>
+					</tr>
+
+					<tr valign="middle">
+						<td width="100">メールアドレス</td>
+						<td width="100"><%= current_customer.email %></td>
+					</tr>
+
+					<tr valign="middle">
+						<td width="100">郵便番号</td>
+						<td width="100"><%= current_customer.postal_code %></td>
+					</tr>
+
+					<tr valign="middle">
+						<td width="100">住所</td>
+						<td width="100"><%= current_customer.postal_code%><%= current_customer.address %></td>
+					</tr>
+
+					<tr valign="middle">
+						<td width="100">電話番号</td>
+						<td width="100"><%= current_customer.telephone_number %></td>
+					</tr>
+				</tbody>
+			</table>
+
+    </div>
+  </div>
+
+  <div class="row">
+　	<%= link_to "配送先一覧" , addresses_path, class: "btn btn-info" %>
+　	<%= link_to "注文履歴一覧", orders_path, class: "btn btn-info" %>
+　</div>
+
+</div>

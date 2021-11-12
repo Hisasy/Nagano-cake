@@ -3,7 +3,7 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @customers = Customer.page(params[:page]).per(10)
+    @customers = Customer.all.order(created_at: "DESC")
   end
 
   def show
@@ -24,9 +24,8 @@ class Admin::CustomersController < ApplicationController
   end
 
   private
-  def item_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana,
-                                     :postal_code, :address, :telephone_number, :email, :is_active)
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)
   end
 
 end

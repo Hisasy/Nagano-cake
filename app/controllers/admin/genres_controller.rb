@@ -10,14 +10,8 @@ class Admin::GenresController < ApplicationController
 
   def create
     @genre = Genre.new(genre_params)
-
-    if @genre.save
-      flash[:success]='Genre was successfully updated'
-      redirect_to admin_genres_path
-    else
-      @genres = Genre.all.order(id: :asc)
-      render :index
-    end
+    @genre.save
+    redirect_to admin_genres_path
   end
 
   def edit
@@ -25,18 +19,23 @@ class Admin::GenresController < ApplicationController
 
   end
 
+  def destroy
+    @genre = Genre.find(params[:id])
+    @genre.destroy
+    redirect_to admin_genres_path
+  end
+
   def update
     @genre = Genre.find(params[:id])
 
     if @genre.update(genre_params)
-      flash[:success]='Genre was successfully updated'
       redirect_to admin_genres_path
     else
-      render :edit
+      render :index
     end
   end
 
-   private
+  private
   def genre_params
     params.require(:genre).permit(:name)
   end
