@@ -11,7 +11,7 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order_status = params[:order][:order_status].to_i
-    @order.update(status: @order_status)
+    @order.update(order_status: @order_status)
     if @order_status == 1
       @order.order_details.each do |order_detail|
         order_detail.update(production_status: 1)

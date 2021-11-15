@@ -9,9 +9,9 @@ class Admin::OrderDetailsController < ApplicationController
     @order = @order_detail.order
     @order_details = OrderDetail.all
       if @production_status == 2
-        @order_detail.order.update(production_status: 2)
+        @order_detail.order.update(order_status: 2)
       elsif @order.order_details.count == @order.order_details.where(production_status: 3).count
-        @order_detail.order.update(production_status: 3)
+        @order_detail.order.update(order_status: 3)
       end
     redirect_to admin_order_path(@order_detail.order)
   end

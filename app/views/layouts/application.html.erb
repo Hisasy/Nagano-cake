@@ -11,10 +11,10 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+      <nav class="navbar navbar-expand-lg navbar-light bg-warning" >
         <!--アイコン部分-->
         <%= link_to root_path do %>
-          <%= image_tag"img/ol_nagano_logo.png",class:"navbar-brand"%>
+          <%= image_tag"img/nagano_cake.jpg",class:"navbar-brand" %>
         <% end %>
         <!--ハンバーガー部分-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,53 +23,56 @@
         <!--ナビゲーションメニュー-->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-        <% if customer_signed_in? %>
-          <li class="nav-item">
-            <%= link_to ' お店の紹介', about_path %>
-          </li>
-        　<li class="nav-item">
-            <%= link_to ' 商品一覧', items_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' カートリスト', cart_items_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' マイページ', customer_path(current_customer) %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' ログアウト', destroy_customer_session_path,method: :delete %>
-          </li>
-        <% elsif admin_signed_in? %>
-          <li class="nav-item">
-            <%= link_to ' 商品一覧', admin_items_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' 会員一覧', admin_customers_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' 注文履歴一覧', admin_root_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' ジャンル一覧', admin_genres_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' ログアウト', destroy_admin_session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to ' お店の紹介', about_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to " 商品一覧", items_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' 新規登録', new_customer_registration_path %>
-          </li>
-          <li class="nav-item">
-            <%= link_to ' ログイン', new_customer_session_path %>
-          </li>
-        <% end %>
-      
+            <% if customer_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "お店の紹介", about_path, class: "btn btn-danger" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "商品一覧", items_path, class: "btn btn-success" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "カートリスト", cart_items_path, class: "btn btn-primary" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "マイページ", customer_path(current_customer), class: "btn btn-success" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_customer_session_path,method: :delete, class: "btn btn-dark" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "商品一覧", admin_items_path, class: "btn btn-success" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "会員一覧", admin_customers_path, class: "btn btn-primary" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "注文履歴一覧", admin_root_path, class: "btn btn-danger" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-info" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-dark" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "お店の紹介", about_path, class: "btn btn-danger" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to " 商品一覧", items_path, class: "btn btn-success" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-secondary" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_customer_session_path, class: "btn btn-dark" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

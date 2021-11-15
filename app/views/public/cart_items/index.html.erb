@@ -24,9 +24,7 @@
           <td>¥<%= cart_item.add_tax_price.to_s(:delimited) %></td>
           <td>
             <%= form_with model:cart_item,url:cart_item_path(cart_item),method: :patch,local:true do |f| %>
-              <!--この隠れフィールド必要？これで商品と数量をリンクさせている？-->
               <%= f.hidden_field :item_id, value:cart_item.item.id %>
-              <!--valueであらかじめcart_itemのamountを記述しておく-->
               <%= f.number_field :amount,value:cart_item.amount,id:"number",min:"1" %>
               <%= f.submit '数量変更',class: "btn btn-outline-info mt-3 btn-sm" %>
             <% end %>
@@ -40,5 +38,9 @@
 
   <div><%= link_to "買い物を続ける",root_path, class: "btn btn-outline-info mb-3" %></div>
   <div>合計金額　 ¥<%= @total.round.to_s(:delimited) %></div>
-  <div><%= link_to "情報入力にすすむ", new_order_path, class:"btn btn-outline-info float-right btn-lg" %></div>
+  <% if @cart_items != [] %>
+      <div class="offset-6">
+    <div><%= link_to "情報入力にすすむ", new_order_path, class:"btn btn-outline-info float-right btn-lg" %></div>
+  <% end %>
+
 </div>

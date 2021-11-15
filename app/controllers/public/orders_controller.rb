@@ -28,8 +28,13 @@ class Public::OrdersController < ApplicationController
 
     elsif params[:order][:address_option] == "2"
       @order.shipping_postal_code = params[:order][:postal_code]
-      @order.shipping_address = params[:order][:order_address]
+      @order.shipping_address = params[:order][:address]
       @order.name = params[:order][:name]
+
+      # 新しい住所を追加する際、未入力の項目があったら先に進めない記述
+      if @order.shipping_postal_code.blank? or @order.shipping_address.blank? or @order.name.blank?
+        render :new
+      end
 
     else
       render :new

@@ -1,17 +1,16 @@
+<nav class="navbar navbar-expand-lg">
 <!--メイン画像-->
-<!--<div class="img__inner">-->
+<div class="img__inner">
   <!--JS設定してから画像追加-->
-<!--  %= image_tag"img/cake1.jpeg",class:"main-img"%>-->
-<!--  %= image_tag"img/cake2.jpeg",class:"main-img"%>-->
-<!--  %= image_tag"img/cake3.jpeg",class:"main-img"%>-->
-<!--  %= image_tag"img/cake4.jpeg",class:"main-img"%>-->
-<!--  %= image_tag"img/cake6.jpeg",class:"main-img"%>-->
-
-
-<!--</div>-->
+  <%= image_tag"img/cake1.jpeg",class:"main-img", :size =>'200x200' %>
+  <%= image_tag"img/cake2.jpeg",class:"main-img", :size =>'200x200' %>
+  <%= image_tag"img/cake3.jpeg",class:"main-img", :size =>'200x200' %>
+  <%= image_tag"img/cake4.jpeg",class:"main-img", :size =>'200x200' %>
+  <%= image_tag"img/cake6.jpeg",class:"main-img", :size =>'200x200' %>
+</div>
 
 <div class="flame-image">
-  <!--%= image_tag"img/flame.png"%>-->
+  <%= image_tag"img/colorful_frame.png" %>
   <p>
     ようこそ、ながのCAKEへ！<br />
     このサイトは、ケーキ販売のECサイトになります。<br />
@@ -35,6 +34,7 @@
     <% end %>
   </div>
 </div>
+</nav>
 
 <!--ジャンル-->
 <%= render 'public/items/genre', genres: @genres %>

@@ -4,16 +4,12 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items.all
-    # inject(0)で配列の合計を算出する
-    # 配列オブジェクト.inject(はじめの値){|初期値,要素|ブロック処理}
-    # @cart_itemsから１つずつitemを取り出してsumにitem.sum_of_priceを足す
     @total = @cart_items.inject(0) { |sum, item| sum + item.sub_price }
   end
 
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
-    # カートにある全ての情報を取得し
     @cart_items = current_customer.cart_items.all
     # 数量を変更できるようにする記述
     @cart_items.each do |cart_item|
