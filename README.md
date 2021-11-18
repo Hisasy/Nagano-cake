@@ -1,9 +1,7 @@
-# README
+# Nagano cake
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+スクールの課題で「ながのケーキ」というECサイトを作成しました。
+作成詳細は以下です。
 
 * Ruby version
   Rails 5.2.5
