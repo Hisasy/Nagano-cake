@@ -3,12 +3,14 @@
 スクールの課題で「ながのケーキ」というECサイトを作成しました。
 作成詳細は以下です。
 
-* Ruby version
-  Rails 5.2.5
+* WBS（作業分解構造図）  
+https://docs.google.com/spreadsheets/d/15-E_bNdb0GaXKCYLzrypEUFKTnpzeH72cAmbErTGe_0/edit?usp=sharing
 
-* System dependencies
+* アプリケーション詳細設計書
 
-* Configuration
+* テーブル定義書
+
+* ER図
 
 * Database creation
 
